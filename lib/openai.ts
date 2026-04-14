@@ -1,7 +1,13 @@
 import OpenAI from "openai";
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export const MODEL_NAME = "gpt-4.1-mini";
 
-export const MODEL_NAME = process.env.OPENAI_MODEL || "gpt-5.4-thinking";
+export function getOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("OPENAI_API_KEY is not set.");
+  }
+
+  return new OpenAI({ apiKey });
+}

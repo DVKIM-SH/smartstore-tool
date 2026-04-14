@@ -1,8 +1,9 @@
-import { openai, MODEL_NAME } from "@/lib/openai";
+import { getOpenAI, MODEL_NAME } from "@/lib/openai";
 import { buildDescriptionPrompt } from "@/lib/prompts";
 
 export async function POST(req: Request) {
   try {
+    const openai = getOpenAI();
     const body = await req.json();
 
     const prompt = buildDescriptionPrompt(body);
